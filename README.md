@@ -56,9 +56,10 @@
     </tr>
     </table>
 
-    <br>
+    
     테이블 카카오톡에 올린거 받기
 
+    MY SQL
     connection 생성하기
     user명 manager
     password test1234   로 생성하기.
