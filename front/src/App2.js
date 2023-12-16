@@ -143,14 +143,73 @@ function App() {
               <input type="text" id="sodium" name="sodium" placeholder="0" />
               <span>이하</span>
             </div>
+            <div className="prompt">
+              <label for="calorie" className="cal">
+                열량
+              </label>
+              <input type="text" id="calorie" name="calorie" placeholder="0" />
+              <span>이상</span>
+              <input type="text" id="calorie" name="calorie" placeholder="0" />
+              <span>이하</span>
+            </div>
           </div>
           <button className="search-button">검색</button>
         </div>
         <div className="search-results">
-          <span>내용이 들어올 예정</span>
           {!foodData ? null : (
-            <>
+            <div className="content-box">
               {foodData.map((item) => (
+                <div className="content-detail" key={item.id}>
+                  <h3>{item.food_name}</h3>
+                  <div className="block">
+                    <div className="food">
+                      <img src={item.main_image} alt="Example Image" />
+                    </div>
+                    <div className="info">
+                      <span>재료 : {item.ingredient}</span>
+                      <span>탄수화물 : {item.carbohydrate}</span>
+                      <span>단백질 : {item.protein}</span>
+                      <span>지방 : {item.province}</span>
+                      <span>나트륨 : {item.salt}</span>
+                      <span>열량 : {item.calorie}</span>
+                    </div>
+                  </div>
+                  <li>
+                    <p>{item.cooking_method1}</p>
+                    <p>{item.cooking_method2}</p>
+                    <p>{item.cooking_method3}</p>
+                    <p>{item.cooking_method4}</p>
+                    <p>{item.cooking_method5}</p>
+                    <p>{item.cooking_method6}</p>
+                    <p>{item.cooking_method7}</p>
+                    <p>{item.cooking_method8}</p>
+                    <p>{item.cooking_method9}</p>
+                    <p>{item.cooking_method10}</p>
+                    <p>{item.cooking_method11}</p>
+                    <p>{item.cooking_method12}</p>
+                    <p>{item.cooking_method13}</p>
+                    <p>{item.cooking_method14}</p>
+                    <p>{item.cooking_method15}</p>
+                    <p>{item.cooking_method16}</p>
+                    <p>{item.cooking_method17}</p>
+                    <p>{item.cooking_method18}</p>
+                    <p>{item.cooking_method19}</p>
+                    <p>{item.cooking_method20}</p>
+                  </li>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+/*
+
                 <li key={item.id}>
                   <img src={item.main_image} alt="Example Image" />
                   <p>음식 이름: {item.food_name}</p>
@@ -180,13 +239,5 @@ function App() {
                     {item.cooking_method20}
                   </p>
                 </li>
-              ))}
-            </>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
 
-export default App;
+*/
