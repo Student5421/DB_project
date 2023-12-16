@@ -13,7 +13,7 @@
 
 .top h1 {
   align-self: center;
-  color: #E5FFCC;
+  color: #e5ffcc;
 }
 
 .search-prompt {
@@ -21,6 +21,11 @@
   padding: 30px;
   display: flex;
   justify-content: center;
+}
+
+.search-button2 {
+  margin-left: 5px;
+  border-radius: 10px;
 }
 
 .search-prompt .search-input {
@@ -38,7 +43,7 @@
   display: flex;
   flex-direction: column;
   width: 250px;
-  background-color: #E5FFCC;
+  background-color: #e5ffcc;
   margin-top: 10px;
   margin-left: 5px;
   margin-right: 5px;
@@ -146,7 +151,7 @@
   display: flex;
   flex-direction: column;
   width: 1000px;
-  background-color: #DCDCDC;
+  background-color: #dcdcdc;
   margin: 5px;
   border-radius: 10px;
 }

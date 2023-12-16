@@ -197,7 +197,9 @@ function App() {
           className="search-input"
           onChange={searchChange}
         />
-        <button onClick={dataSearch}></button>
+        <button className="search-button2" onClick={dataSearch}>
+          검색
+        </button>
         <img src="" />
       </div>
       <div className="contents-container">

@@ -83,7 +83,6 @@ function App() {
   };
   return (
     <div>
-      <button onClick={toggleHandle}>db체크용</button>
       {!isClicked ? (
         <>
           <div>hi</div>
@@ -99,6 +98,8 @@ function App() {
           <Route path="/" element={<App2 />} />
         </Routes>
       </Router>
+
+      <button onClick={toggleHandle}>db체크용</button>
     </div>
   );
 }
