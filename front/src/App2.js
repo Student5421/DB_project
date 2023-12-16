@@ -25,6 +25,66 @@ function App() {
     }));
   };
 
+  const [rice, setRice] = useState(false);
+  const [side, setSide] = useState(false);
+  const [soup, setSoup] = useState(false);
+  const [dessert, setDessert] = useState(false);
+  const [selectFoodData, setSelectFoodData] = useState();
+  const buttonData = async () => {
+    var one = false;
+    var two = false;
+    var three = false;
+    var four = false;
+    console.log(
+      "버튼상태=>" +
+        buttonState.button1 +
+        buttonState.button2 +
+        buttonState.button3 +
+        buttonState.button4
+    );
+
+    if (buttonState.button1) {
+      one = true;
+    } else {
+      one = false;
+    }
+    if (buttonState.button2) {
+      two = true;
+    } else {
+      two = false;
+    }
+    if (buttonState.button3) {
+      three = true;
+    } else {
+      three = false;
+    }
+    if (buttonState.button4) {
+      four = true;
+    } else {
+      four = false;
+    }
+
+    //console.log("음식적용테스트 =>" + rice + side + soup + dessert);
+    console.log("음식적용테스트 =>" + one + two + three + four);
+
+    try {
+      // Axios를 사용하여 Node.js로 데이터 전송
+      const response = await axios.post("/testdb/selectFoodData", {
+        one,
+        two,
+        three,
+        four,
+      });
+
+      setSelectFoodData(response.data); // Node.js에서 받은 데이터를 상태에 저장
+      //console.log(JSON.stringify(response.data[0].category));
+      setFoodData(null);
+      setFoodData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   const [foodData, setFoodData] = useState();
   const getFoodData = async () => {
     try {
@@ -144,7 +204,9 @@ function App() {
               <span>이하</span>
             </div>
           </div>
-          <button className="search-button">검색</button>
+          <button className="search-button" onClick={buttonData}>
+            검색
+          </button>
         </div>
         <div className="search-results">
           <span>내용이 들어올 예정</span>

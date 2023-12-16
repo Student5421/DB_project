@@ -25,7 +25,7 @@ function App() {
     // http://openapi.foodsafetykorea.go.kr/api/sample/COOKRCP01/xml/1/5/RCP_NM=값 &RCP_PARTS_DTLS=값 &CHNG_DT=값 &RCP_PAT2=값
     /* e2b225c8d29b4f789e3e api 키*/
     const apiUrl =
-      "http://openapi.foodsafetykorea.go.kr/api/e2b225c8d29b4f789e3e/COOKRCP01/json/1/3";
+      "http://openapi.foodsafetykorea.go.kr/api/e2b225c8d29b4f789e3e/COOKRCP01/json/1/100";
     async function fetchData() {
       try {
         console.log("데이터 받아오는중");
