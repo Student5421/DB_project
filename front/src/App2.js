@@ -74,6 +74,16 @@ function App() {
         two,
         three,
         four,
+        hydrate,
+        hydrate2,
+        protein,
+        protein2,
+        province,
+        province2,
+        salt,
+        salt2,
+        calorie,
+        calorie2,
       });
 
       setSelectFoodData(response.data); // Node.js에서 받은 데이터를 상태에 저장
@@ -97,6 +107,78 @@ function App() {
     }
   };
 
+  const [hydrate, setHydrate] = useState(0);
+  const [protein, setProtein] = useState(0);
+  const [province, setProvince] = useState(0);
+  const [salt, setSalt] = useState(0);
+  const [calorie, setCalorie] = useState(0);
+  const [hydrate2, setHydrate2] = useState(0);
+  const [protein2, setProtein2] = useState(0);
+  const [province2, setProvince2] = useState(0);
+  const [salt2, setSalt2] = useState(0);
+  const [calorie2, setCalorie2] = useState(0);
+
+  const changeHydrate = (e) => {
+    setHydrate(e.target.value);
+  };
+
+  const changeHydrate2 = (e) => {
+    setHydrate2(e.target.value);
+  };
+
+  const changeProtein = (e) => {
+    setProtein(e.target.value);
+    console.log(protein);
+  };
+
+  const changeProtein2 = (e) => {
+    setProtein2(e.target.value);
+  };
+
+  const changeProvince = (e) => {
+    setProvince(e.target.value);
+  };
+
+  const changeProvince2 = (e) => {
+    setProvince2(e.target.value);
+  };
+  const changeSalt = (e) => {
+    setSalt(e.target.value);
+  };
+
+  const changeSalt2 = (e) => {
+    setSalt2(e.target.value);
+  };
+  const changeCalorie = (e) => {
+    setCalorie(e.target.value);
+  };
+
+  const changeCalorie2 = (e) => {
+    setCalorie2(e.target.value);
+  };
+
+  const [searchData, setSearchData] = useState("");
+
+  const searchChange = (e) => {
+    setSearchData(e.target.value);
+  };
+
+  const dataSearch = async () => {
+    try {
+      // Axios를 사용하여 Node.js로 데이터 전송
+      const response = await axios.post("/testdb/searchFoodData", {
+        searchData,
+      });
+
+      //setSelectFoodData(response.data); // Node.js에서 받은 데이터를 상태에 저장
+      //console.log(JSON.stringify(response.data[0].category));
+      setFoodData(null);
+      setFoodData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   useEffect(() => {
     getFoodData();
     console.log(JSON.stringify(foodData));
@@ -113,7 +195,9 @@ function App() {
           type="text"
           placeholder="원하는 재료를 검색해주세요."
           className="search-input"
+          onChange={searchChange}
         />
+        <button onClick={dataSearch}></button>
         <img src="" />
       </div>
       <div className="contents-container">
@@ -166,6 +250,7 @@ function App() {
                 id="carbohydrate"
                 name="carbohydrate"
                 placeholder="0"
+                onChange={changeHydrate}
               />
               <span>이상</span>
               <input
@@ -173,6 +258,7 @@ function App() {
                 id="carbohydrate"
                 name="carbohydrate"
                 placeholder="0"
+                onChange={changeHydrate2}
               />
               <span>이하</span>
             </div>
@@ -180,27 +266,84 @@ function App() {
               <label for="protein" className="pro">
                 단백질
               </label>
-              <input type="text" id="protein" name="protein" placeholder="0" />
+              <input
+                type="text"
+                id="protein"
+                name="protein"
+                placeholder="0"
+                onChange={changeProtein}
+              />
               <span>이상</span>
-              <input type="text" id="protein" name="protein" placeholder="0" />
+              <input
+                type="text"
+                id="protein"
+                name="protein"
+                placeholder="0"
+                onChange={changeProtein2}
+              />
               <span>이하</span>
             </div>
             <div className="prompt">
               <label for="lipid" className="lip">
                 지방
               </label>
-              <input type="text" id="lipid" name="lipid" placeholder="0" />
+              <input
+                type="text"
+                id="lipid"
+                name="lipid"
+                placeholder="0"
+                onChange={changeProvince}
+              />
               <span>이상</span>
-              <input type="text" id="lipid" nam="lipid" placeholder="0" />
+              <input
+                type="text"
+                id="lipid"
+                nam="lipid"
+                placeholder="0"
+                onChange={changeProvince2}
+              />
               <span>이하</span>
             </div>
             <div className="prompt">
               <label for="sodium" className="sod">
                 나트륨
               </label>
-              <input type="text" id="sodium" name="sodium" placeholder="0" />
+              <input
+                type="text"
+                id="sodium"
+                name="sodium"
+                placeholder="0"
+                onChange={changeSalt}
+              />
               <span>이상</span>
-              <input type="text" id="sodium" name="sodium" placeholder="0" />
+              <input
+                type="text"
+                id="sodium"
+                name="sodium"
+                placeholder="0"
+                onChange={changeSalt2}
+              />
+              <span>이하</span>
+            </div>
+            <div className="prompt">
+              <label for="calorie" className="cal">
+                열량
+              </label>
+              <input
+                type="text"
+                id="calorie"
+                name="calorie"
+                placeholder="0"
+                onChange={changeCalorie}
+              />
+              <span>이상</span>
+              <input
+                type="text"
+                id="calorie"
+                name="calorie"
+                placeholder="0"
+                onChange={changeCalorie2}
+              />
               <span>이하</span>
             </div>
           </div>
@@ -209,10 +352,60 @@ function App() {
           </button>
         </div>
         <div className="search-results">
-          <span>내용이 들어올 예정</span>
           {!foodData ? null : (
-            <>
+            <div className="content-box">
               {foodData.map((item) => (
+                <div className="content-detail" key={item.id}>
+                  <h3>{item.food_name}</h3>
+                  <div className="block">
+                    <div className="food">
+                      <img src={item.main_image} alt="Example Image" />
+                    </div>
+                    <div className="info">
+                      <span>재료 : {item.ingredient}</span>
+                      <span>탄수화물 : {item.carbohydrate}</span>
+                      <span>단백질 : {item.protein}</span>
+                      <span>지방 : {item.province}</span>
+                      <span>나트륨 : {item.salt}</span>
+                      <span>열량 : {item.calorie}</span>
+                    </div>
+                  </div>
+                  <li>
+                    <p>{item.cooking_method1}</p>
+                    <p>{item.cooking_method2}</p>
+                    <p>{item.cooking_method3}</p>
+                    <p>{item.cooking_method4}</p>
+                    <p>{item.cooking_method5}</p>
+                    <p>{item.cooking_method6}</p>
+                    <p>{item.cooking_method7}</p>
+                    <p>{item.cooking_method8}</p>
+                    <p>{item.cooking_method9}</p>
+                    <p>{item.cooking_method10}</p>
+                    <p>{item.cooking_method11}</p>
+                    <p>{item.cooking_method12}</p>
+                    <p>{item.cooking_method13}</p>
+                    <p>{item.cooking_method14}</p>
+                    <p>{item.cooking_method15}</p>
+                    <p>{item.cooking_method16}</p>
+                    <p>{item.cooking_method17}</p>
+                    <p>{item.cooking_method18}</p>
+                    <p>{item.cooking_method19}</p>
+                    <p>{item.cooking_method20}</p>
+                  </li>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+/*
+
                 <li key={item.id}>
                   <img src={item.main_image} alt="Example Image" />
                   <p>음식 이름: {item.food_name}</p>
@@ -242,13 +435,5 @@ function App() {
                     {item.cooking_method20}
                   </p>
                 </li>
-              ))}
-            </>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
 
-export default App;
+*/

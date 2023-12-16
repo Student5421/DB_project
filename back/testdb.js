@@ -53,27 +53,24 @@ router.get("/getAllFood", (req, res) => {
 router.post("/selectFoodData", async (req, res) => {
   console.log("selectFoodData 호출됨.");
   try {
-    const { one, two, three, four } = req.body;
+    const {
+      one,
+      two,
+      three,
+      four,
+      hydrate,
+      hydrate2,
+      protein,
+      protein2,
+      province,
+      province2,
+      salt,
+      salt2,
+      calorie,
+      calorie2,
+    } = req.body;
     console.log(one + two + three + four);
-
-    // 동적인 쿼리를 작성
-    // let query =
-    //   "SELECT * FROM food INNER JOIN recipe ON food.food_id = recipe.food_id WHERE 1";
-
-    // // 각 변수가 null이 아닌 경우에만 해당 조건을 추가
-    // // 각 변수가 true인 경우에만 해당 조건을 추가
-    // if (one) {
-    //   query += ' AND food.category = "밥"';
-    // }
-    // if (two) {
-    //   query += ' AND food.category = "국&찌개"';
-    // }
-    // if (three) {
-    //   query += ' AND food.category = "반찬"';
-    // }
-    // if (four) {
-    //   query += ' AND food.category = "후식"';
-    // }
+    console.log("데이터 확인용 " + hydrate + " " + hydrate2);
     let query =
       "SELECT * FROM food INNER JOIN recipe ON food.food_id = recipe.food_id WHERE 1";
 
@@ -97,6 +94,45 @@ router.post("/selectFoodData", async (req, res) => {
     if (categories.length > 0) {
       query += " AND food.category IN (" + categories.join(", ") + ")";
     }
+    if (!(parseInt(hydrate) === 0 && parseInt(hydrate2) === 0)) {
+      query +=
+        " AND food.carbohydrate >= " +
+        parseInt(hydrate) +
+        " AND food.carbohydrate <= " +
+        parseInt(hydrate2);
+    }
+
+    if (!(parseInt(protein) === 0 && parseInt(protein2) === 0)) {
+      query +=
+        " AND food.protein >= " +
+        parseInt(protein) +
+        " AND food.protein <= " +
+        parseInt(protein2);
+    }
+
+    if (!(parseInt(province) === 0 && parseInt(province2) === 0)) {
+      query +=
+        " AND food.province >= " +
+        parseInt(province) +
+        " AND food.province <= " +
+        parseInt(province2);
+    }
+
+    if (!(parseInt(salt) === 0 && parseInt(salt2) === 0)) {
+      query +=
+        " AND food.salt >= " +
+        parseInt(salt) +
+        " AND food.salt <= " +
+        parseInt(salt2);
+    }
+
+    if (!(parseInt(calorie) === 0 && parseInt(calorie2) === 0)) {
+      query +=
+        " AND food.calorie >= " +
+        parseInt(calorie) +
+        " AND food.calorie <= " +
+        parseInt(calorie2);
+    }
 
     console.log(query);
 
@@ -116,6 +152,28 @@ router.post("/selectFoodData", async (req, res) => {
     console.error("Error executing MySQL query:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
+});
+
+router.post("/searchFoodData", (req, res) => {
+  console.log("searchFoodData 호출됨.");
+
+  const searchString = req.body.searchData;
+  console.log(searchString);
+
+  let query =
+    "SELECT * FROM food INNER JOIN recipe ON food.food_id = recipe.food_id " +
+    "WHERE food.food_name LIKE '%" +
+    searchString +
+    "%'";
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(query);
+      res.json(results);
+    }
+  });
 });
 
 router.post("/postDataFood", async (req, res) => {
