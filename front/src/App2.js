@@ -1,7 +1,8 @@
+import axios from "axios";
 import "./App2.css";
 
 import imgLogo from "./assets/logo.png";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function App() {
   const [result, setResult] = useState("");
@@ -23,6 +24,23 @@ function App() {
       [button]: !prevState[button],
     }));
   };
+
+  const [foodData, setFoodData] = useState();
+  const getFoodData = async () => {
+    try {
+      axios.get("/testdb/getAllFood").then((res) => {
+        //console.log(res.data);
+        setFoodData(res.data);
+      });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getFoodData();
+    console.log(JSON.stringify(foodData));
+  }, []);
 
   return (
     <div>
@@ -126,9 +144,45 @@ function App() {
               <span>이하</span>
             </div>
           </div>
+          <button className="search-button">검색</button>
         </div>
         <div className="search-results">
           <span>내용이 들어올 예정</span>
+          {!foodData ? null : (
+            <>
+              {foodData.map((item) => (
+                <li key={item.id}>
+                  <img src={item.main_image} alt="Example Image" />
+                  <p>음식 이름: {item.food_name}</p>
+                  <p>음식 탄수화물: {item.carbohydrate}</p>
+                  <p>음식 단백질: {item.protein}</p>
+                  <p>음식 지방: {item.province}</p>
+                  <p>음식 나트륨: {item.salt}</p>
+                  <p>
+                    조리 방법: {item.cooking_method1} {item.cooking_method2}{" "}
+                    {item.cooking_method3}
+                    {item.cooking_method4}
+                    {item.cooking_method5}
+                    {item.cooking_method6}
+                    {item.cooking_method7}
+                    {item.cooking_method8}
+                    {item.cooking_method9}
+                    {item.cooking_method10}
+                    {item.cooking_method11}
+                    {item.cooking_method12}
+                    {item.cooking_method13}
+                    {item.cooking_method14}
+                    {item.cooking_method15}
+                    {item.cooking_method16}
+                    {item.cooking_method17}
+                    {item.cooking_method18}
+                    {item.cooking_metho19}
+                    {item.cooking_method20}
+                  </p>
+                </li>
+              ))}
+            </>
+          )}
         </div>
       </div>
     </div>

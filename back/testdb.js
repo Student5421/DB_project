@@ -29,6 +29,27 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/getAllFood", (req, res) => {
+  console.log("getAllFood 호출됨.");
+
+  const sqlQuery = `
+  SELECT 
+    *
+  FROM 
+    food
+  INNER JOIN 
+    recipe ON food.food_id = recipe.food_id
+`;
+
+  connection.query(sqlQuery, (err, results) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(results);
+    }
+  });
+});
+
 router.post("/postDataFood", async (req, res) => {
   // POST 요청의 데이터는 req.body에 있습니다.
   const dataFromFrontend = req.body;
