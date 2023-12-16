@@ -50,6 +50,74 @@ router.get("/getAllFood", (req, res) => {
   });
 });
 
+router.post("/selectFoodData", async (req, res) => {
+  console.log("selectFoodData 호출됨.");
+  try {
+    const { one, two, three, four } = req.body;
+    console.log(one + two + three + four);
+
+    // 동적인 쿼리를 작성
+    // let query =
+    //   "SELECT * FROM food INNER JOIN recipe ON food.food_id = recipe.food_id WHERE 1";
+
+    // // 각 변수가 null이 아닌 경우에만 해당 조건을 추가
+    // // 각 변수가 true인 경우에만 해당 조건을 추가
+    // if (one) {
+    //   query += ' AND food.category = "밥"';
+    // }
+    // if (two) {
+    //   query += ' AND food.category = "국&찌개"';
+    // }
+    // if (three) {
+    //   query += ' AND food.category = "반찬"';
+    // }
+    // if (four) {
+    //   query += ' AND food.category = "후식"';
+    // }
+    let query =
+      "SELECT * FROM food INNER JOIN recipe ON food.food_id = recipe.food_id WHERE 1";
+
+    const categories = [];
+
+    // 각 변수가 null이 아닌 경우에만 해당 조건을 추가
+    // 각 변수가 true인 경우에만 해당 조건을 추가
+    if (one) {
+      categories.push('"밥"');
+    }
+    if (two) {
+      categories.push('"반찬"');
+    }
+    if (three) {
+      categories.push('"국&찌개"');
+    }
+    if (four) {
+      categories.push('"후식"');
+    }
+
+    if (categories.length > 0) {
+      query += " AND food.category IN (" + categories.join(", ") + ")";
+    }
+
+    console.log(query);
+
+    // MySQL 쿼리를 실행하여 데이터를 가져옴
+    //const [rows, fields] = await connection.promise().query(query);
+    //console.log(rows);
+    connection.query(query, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(JSON.stringify(results));
+        res.json(results);
+      }
+    });
+    //res.json(rows); // 결과를 JSON 형태로 응답
+  } catch (error) {
+    console.error("Error executing MySQL query:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 router.post("/postDataFood", async (req, res) => {
   // POST 요청의 데이터는 req.body에 있습니다.
   const dataFromFrontend = req.body;
