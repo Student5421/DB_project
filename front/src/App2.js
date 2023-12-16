@@ -30,7 +30,7 @@ function App() {
         <h1>단웅셰프</h1>
       </div>
       <div className='search-prompt'>
-        <input type='text' placeholder='원하는 재료를 검색해주세요.' className='search-input'/>
+        <input type='text' placeholder='원하는 재료를 입력해주세요.' className='search-input'/>
         <img src=''/>
       </div>
       <div className='contents-container'>
@@ -99,6 +99,7 @@ function App() {
               <span>이하</span>
             </div>
           </div>
+          <button className='search-button'>검색</button>
         </div>
         <div className='search-results'>
           <span>내용이 들어올 예정</span>
