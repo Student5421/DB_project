@@ -1,0 +1,148 @@
+.top {
+  display: flex;
+  justify-content: center;
+  background-color: #336600;
+}
+
+.top img {
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 60px;
+}
+
+.top h1 {
+  align-self: center;
+  color: #E5FFCC;
+}
+
+.search-prompt {
+  align-self: center;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-prompt .search-input {
+  width: 500px;
+  height: 32px;
+  font-size: 15px;
+  border: 1px solid #4caf50;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 20px;
+  background-color: #fff;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  background-color: #E5FFCC;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 10px;
+}
+
+.filter-container h4 {
+  margin-left: 10px;
+}
+
+.filter-container button {
+  width: 200px;
+  align-self: center;
+  font-size: 90%;
+}
+
+.inactiveButton {
+  background-color: #ddd;
+  color: #777;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+.activeButton {
+  background-color: #4caf50;
+  color: #fff;
+  border: 1px solid #45a049;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+.contents-container {
+  display: flex;
+}
+
+.filter-container .nutrient-filter .prompt {
+  display: flex;
+  margin-left: 20px;
+  margin-bottom: 5px;
+}
+
+.filter-container .nutrient-filter .pro {
+  margin-right: 11px;
+}
+
+.filter-container .nutrient-filter .lip {
+  margin-right: 22px;
+}
+
+.filter-container .nutrient-filter .sod {
+  margin-right: 11px;
+}
+
+.filter-container .nutrient-filter .prompt input {
+  width: 10%;
+  padding: 0 10px;
+  margin-left: 10px;
+  margin-right: 7px;
+  align-self: center;
+  display: flex;
+  border-radius: 15px;
+  outline: none;
+  background-color: #fff;
+}
+
+.filter-container .nutrient-filter .prompt label {
+  font-size: 70%;
+}
+
+.filter-container .nutrient-filter .prompt span {
+  font-size: 70%;
+}
+
+.search-results {
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.filter-container .search-button {
+  width: 60%;
+  background-color: #4caf50;
+  color: #fff;
+  border: 1px solid #45a049;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border-radius: 15px;
+  font-size: large;
+}
+
+@font-face {
+  font-family: "Jalnan2TTF";
+  font-weight: normal;
+  src: url("./fonts/Jalnan2TTF.ttf");
+}
+
+body {
+  font-family: "Jalnan2TTF";
+}

@@ -2,6 +2,10 @@ import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import App2 from "./App2.js";
+
 /* e2b225c8d29b4f789e3e api 키*/
 
 function App() {
@@ -69,13 +73,32 @@ function App() {
     }
   };
 
+  const [isClicked, setIsClicked] = useState(true);
+  const toggleHandle = () => {
+    if (isClicked) {
+      setIsClicked(false);
+    } else {
+      setIsClicked(true);
+    }
+  };
   return (
     <div>
-      <div>hi</div>
-      <div>{JSON.stringify(testData)}</div>
-      <div>{JSON.stringify(apiData)}</div>
-      <button onClick={setFoodTable}>set food table</button>
-      <button onClick={setRecipeTable}>set recipe table</button>
+      <button onClick={toggleHandle}>db체크용</button>
+      {!isClicked ? (
+        <>
+          <div>hi</div>
+          <div>{JSON.stringify(testData)}</div>
+          <div>{JSON.stringify(apiData)}</div>
+          <button onClick={setFoodTable}>set food table</button>
+          <button onClick={setRecipeTable}>set recipe table</button>
+        </>
+      ) : null}
+
+      <Router>
+        <Routes>
+          <Route path="/" element={<App2 />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
